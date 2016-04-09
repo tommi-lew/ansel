@@ -8,9 +8,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'squeel'
 
-# Heroku
-gem 'heroku_secrets', github: 'alexpeattie/heroku_secrets'
-
 # Application server
 gem 'passenger'
 
