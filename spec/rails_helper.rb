@@ -67,4 +67,12 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Disable all observers, enable when necessary
+  config.before do |example|
+    observers = example.metadata[:observers]
+
+    ActiveRecord::Base.observers.disable :all
+    ActiveRecord::Base.observers.enable observers if observers.present?
+  end
 end
