@@ -38,6 +38,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.4.0)
     arel (6.0.3)
+    awesome_print (1.6.1)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     browserstack-screenshot (0.0.2)
@@ -206,6 +207,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   browserstack-screenshot
   byebug
   capybara
