@@ -34,6 +34,8 @@ describe BrowserStackService do
           subject.track_and_manage_jobs(ss_job)
           expect(bs_job.reload.status).to eq('done')
         end
+
+        it 'updates result'
       end
 
       context 'queued job is still being processed' do
@@ -137,6 +139,8 @@ describe BrowserStackService do
       expect(subject.screenshots_status('request_id')).to eq('queued_all')
     end
   end
+
+  describe '#job_result'
 
   describe '#update_job' do
     context 'not all browser stack jobs are completed' do

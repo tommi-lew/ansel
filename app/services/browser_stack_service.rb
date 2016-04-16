@@ -20,6 +20,11 @@ class BrowserStackService
     ss_job.browser_stack_jobs.in_progress.each do |job|
       latest_job_status = screenshots_status(job.request_id)
       job.update(status: latest_job_status)
+
+      if latest_job_status == 'done'
+        job.update(result: job_result(job.request_id))
+      end
+
       puts "Latest job status for BSJ #{job.id}: #{latest_job_status}"
     end
 
@@ -67,6 +72,10 @@ class BrowserStackService
 
   def screenshots_status(request_id)
     @client.screenshots_status(request_id)
+  end
+
+  def job_result(request_id)
+    @client.screenshots(request_id)
   end
 
   def update_job(screenshots_job_id)
