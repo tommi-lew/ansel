@@ -13,6 +13,10 @@ require 'capybara/rails'
 require 'rspec/active_job'
 require 'webmock/rspec'
 
+# Sidekiq
+require 'sidekiq/testing'
+Sidekiq::Testing.fake!
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -74,5 +78,10 @@ RSpec.configure do |config|
 
     ActiveRecord::Base.observers.disable :all
     ActiveRecord::Base.observers.enable observers if observers.present?
+  end
+
+  # Ensure sidekiq jobs don't linger between tests
+  config.before do
+    Sidekiq::Worker.clear_all
   end
 end

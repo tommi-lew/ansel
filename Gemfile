@@ -19,6 +19,8 @@ gem 'oj', '~> 2.12.14'
 
 # Background jobs
 gem 'sidekiq'
+gem 'redis-namespace'
+gem 'sinatra', require: nil
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
