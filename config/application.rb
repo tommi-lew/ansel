@@ -22,5 +22,8 @@ module Ansel
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Observers
+    config.active_record.observers = :screenshots_job_observer
   end
 end
