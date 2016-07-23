@@ -9,6 +9,13 @@ describe ScreenshotsJob do
   it { is_expected.to validate_inclusion_of(:status).in_array(subject.class::STATUSES) }
 
   describe 'validations' do
+    describe 'browser_ids_cannot_be_empty' do
+      it 'does not allow browser_ids to be empty' do
+        subject.browser_ids = []
+        expect(subject).to have(1).error_on(:browser_ids)
+      end
+    end
+
     describe 'url_base' do
       it 'has valid url' do
         subject.url_base = 'http://www.sephora.sg'
