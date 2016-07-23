@@ -60,32 +60,32 @@ class BrowserStackService
     url_paths.each do |path|
       screenshot_job.browser_stack_jobs.create(
         url_path: path,
-        job_params: generate_params(screenshot_job.url_base, path)
+        job_params: generate_params(screenshot_job, path)
       )
     end
   end
 
-  def self.generate_params(url_base, url_path)
+  def self.generate_params(screenshot_job, url_path)
     {
-        url: url_base + url_path,
+        url: screenshot_job.url_base + url_path,
         callback_url: '',
         tunnel: 'false',
-        browsers: browsers
+        browsers: generate_browsers_params(screenshot_job)
     }
   end
 
-  def self.browsers
-    [
-      { os: 'Windows', os_version: '8.1', browser_version: '48.0', device: nil, browser: 'chrome' },
-      { os: 'Windows', os_version: '8.1', browser_version: '11.0', device: nil, browser: 'ie' },
-      { os: 'OS X', os_version: 'Yosemite', browser_version: '49.0', device: nil, browser: 'chrome' },
-      { os: 'OS X', os_version: 'Yosemite', browser_version: '8.0', device: nil, browser: 'safari' },
-      { os: 'ios', os_version: '8.3', browser_version: nil, device: 'iPhone 6', browser: 'Mobile Safari' },
-      { os: 'ios', os_version: '8.3', browser_version: nil, device: 'iPhone 6 Plus', browser: 'Mobile Safari' },
-      { os: 'android', os_version: '4.3', browser_version: nil, device: 'Samsung Galaxy Note 3', browser: 'Android Browser' },
-      { os: 'ios', os_version: '8.3', browser_version: nil, device: 'iPad Mini 2', browser: 'Mobile Safari' },
-      { os: 'ios', os_version: '8.3', browser_version: nil, device: 'iPad Air', browser: 'Mobile Safari' }
-    ]
+  def self.generate_browsers_params(screenshot_job)
+    screenshot_job.browser_ids.map do |browser_id|
+      browser = Browser.find(browser_id)
+
+      {
+        os: browser.os,
+        os_version: browser.os_version,
+        browser_version: browser.browser_version,
+        device: browser.device,
+        browser: browser.browser
+      }
+    end
   end
 
   def self.url_paths

@@ -108,17 +108,7 @@ describe BrowserStackService do
     end
   end
 
-  describe '.browsers' do
-    it 'has an array of hashes for each combination of os/browser/device' do
-      subject.class.browsers.each do |browser|
-        expect(browser).to have_key(:os)
-        expect(browser).to have_key(:os_version)
-        expect(browser).to have_key(:browser_version)
-        expect(browser).to have_key(:device)
-        expect(browser).to have_key(:browser)
-      end
-    end
-  end
+  describe '.generate_browsers_params'
 
   describe '.url_paths' do
     it 'contains an array of URL paths' do
