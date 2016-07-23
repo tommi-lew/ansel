@@ -10,45 +10,6 @@ class BrowserStackService
     )
   end
 
-  def track_and_manage_jobs(screenshots_job)
-    ss_job = if screenshots_job.is_a?(ScreenshotsJob)
-               screenshots_job
-             else
-               ScreenshotsJob.find(screenshots_job)
-             end
-
-    ss_job.browser_stack_jobs.in_progress.each do |job|
-      latest_job_status = screenshots_status(job.request_id)
-      job.update(status: latest_job_status)
-
-      if latest_job_status == 'done'
-        job.update(result: job_result(job.request_id))
-      end
-
-      puts "Latest job status for BSJ #{job.id}: #{latest_job_status}"
-    end
-
-    all_jobs = ss_job.browser_stack_jobs
-    scheduled_jobs = all_jobs.scheduled.order(id: :asc)
-    queued_jobs = all_jobs.where(status: 'queued_all')
-    done_jobs = all_jobs.done
-
-    if scheduled_jobs.size > 0 && queued_jobs.size == 0
-      Rails.logger.info "SSJ #{ss_job.id} has scheduled jobs and no queued jobs"
-
-      generate_screenshots_for_job(scheduled_jobs.first)
-      self.class.delay_for(DELAY_SECONDS.seconds).track_and_manage_jobs_delayed(ss_job.id)
-
-    elsif queued_jobs.size > 0
-      Rails.logger.info "SSJ #{ss_job.id} has a queued job"
-      self.class.delay_for(DELAY_SECONDS.seconds).track_and_manage_jobs_delayed(ss_job.id)
-
-    elsif all_jobs.size == done_jobs.size
-      Rails.logger.info "SSJ #{ss_job.id} is done"
-      ss_job.update(status: 'done')
-    end
-  end
-
   def generate_screenshots_for_job(browser_stack_job)
     bs_job = if browser_stack_job.is_a?(BrowserStackJob)
                browser_stack_job
@@ -93,10 +54,6 @@ class BrowserStackService
       ENV['BROWSERSTACK_USERNAME'],
       ENV['BROWSERSTACK_PASSWORD']
     )
-  end
-
-  def self.track_and_manage_jobs_delayed(screenshot_job_id)
-    BrowserStackService.default_api.track_and_manage_jobs(screenshot_job_id)
   end
 
   def self.create_browser_stack_jobs(screenshot_job)
