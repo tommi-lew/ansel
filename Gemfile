@@ -61,6 +61,7 @@ end
 
 group :test do
   gem 'shoulda-matchers', require: false
+  gem 'rspec-collection_matchers', require: false
   gem 'rr', require: false
   gem 'capybara', require: false
   gem 'webmock'
