@@ -2,6 +2,8 @@ class BrowserStackJob < ActiveRecord::Base
   STATUSES = %w(scheduled queue queued_all done)
 
   belongs_to :screenshots_job
+  has_many :screenshot_results
+
   validates :status, presence: true, inclusion: { in: STATUSES }
   validates :url_path, presence: true
 
