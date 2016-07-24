@@ -16,7 +16,7 @@ describe ScreenshotsGenerator do
 
     context 'invalid request error' do
       it 'schedules a generate screenshot worker to be ran in 1 minute' do
-        stub(client).screenshots_status
+        dont_allow(client).screenshots_status
         stub(client).generate_screenshots { raise Screenshot::InvalidRequestError }
 
         job = create(:browser_stack_job, job_params: { 'fake_key' => 'fake_value' })

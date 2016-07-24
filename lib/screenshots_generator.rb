@@ -18,6 +18,7 @@ class ScreenshotsGenerator
 
     rescue Screenshot::InvalidRequestError
       GenerateScreenshotsJob.perform_in(1.minute, browser_stack_job.id)
+      return
     end
 
     request_state = @browser_stack_client.screenshots_status(request_id)
