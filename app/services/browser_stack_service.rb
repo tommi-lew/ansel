@@ -67,10 +67,10 @@ class BrowserStackService
 
   def self.generate_params(screenshot_job, url_path)
     {
-        url: screenshot_job.url_base + url_path,
-        callback_url: '',
-        tunnel: 'false',
-        browsers: generate_browsers_params(screenshot_job)
+      url: screenshot_job.url_base + url_path,
+      callback_url: Rails.application.routes.url_helpers.job_done_api_browser_stack_url(host: ENV['HOST']),
+      tunnel: 'false',
+      browsers: generate_browsers_params(screenshot_job)
     }
   end
 

@@ -99,12 +99,16 @@ describe BrowserStackService do
 
   describe '.generate_params' do
     it 'builds a hash and returns it' do
-      params = subject.class.generate_params('http://www.fake.sg', '/foo')
+      stub(BrowserStackService).generate_browsers_params { 'fake_browser_params' }
 
-      expect(params[:url]).to eq('http://www.fake.sg/foo')
-      expect(params[:callback_url]).to eq('')
+      screenshot_job = build(:screenshots_job)
+
+      params = subject.class.generate_params(screenshot_job, '/foo')
+
+      expect(params[:url]).to eq('http://www.sephora.sg/foo')
+      expect(params[:callback_url]).to eq('http://localhost:3000/api/browser_stack/job_done')
       expect(params[:tunnel]).to eq('false')
-      expect(params[:browsers]).to eq(subject.class.browsers)
+      expect(params[:browsers]).to eq('fake_browser_params')
     end
   end
 
