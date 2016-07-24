@@ -7,6 +7,7 @@ class CreateBrowserStackJobs < ActiveRecord::Migration
       t.string :request_id
       t.json :result
       t.references :screenshots_job
+      t.timestamps null: false
     end
   end
 end

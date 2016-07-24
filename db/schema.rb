@@ -11,26 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160723131654) do
+ActiveRecord::Schema.define(version: 20160724071137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "browser_stack_jobs", force: :cascade do |t|
-    t.json    "job_params",         default: {}
-    t.string  "url_path"
-    t.string  "status",             default: "scheduled"
-    t.string  "request_id"
-    t.json    "result"
-    t.integer "screenshots_job_id"
+    t.json     "job_params",         default: {}
+    t.string   "url_path"
+    t.string   "status",             default: "scheduled"
+    t.string   "request_id"
+    t.json     "result"
+    t.integer  "screenshots_job_id"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   create_table "browsers", force: :cascade do |t|
-    t.string "os_version"
-    t.string "browser_version"
-    t.string "os"
-    t.string "device"
-    t.string "browser"
+    t.string   "os_version"
+    t.string   "browser_version"
+    t.string   "os"
+    t.string   "device"
+    t.string   "browser"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "screenshot_results", force: :cascade do |t|
+    t.string   "image_url"
+    t.string   "thumbnail_image_url"
+    t.json     "data"
+    t.integer  "browser_id"
+    t.integer  "browser_stack_job_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "screenshots_jobs", force: :cascade do |t|

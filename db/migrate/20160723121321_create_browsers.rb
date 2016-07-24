@@ -6,6 +6,7 @@ class CreateBrowsers < ActiveRecord::Migration
       t.string :os
       t.string :device
       t.string :browser
+      t.timestamps null: false
     end
   end
 end
