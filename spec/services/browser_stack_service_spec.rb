@@ -75,7 +75,7 @@ describe BrowserStackService do
       screenshots_job = create(:screenshots_job)
       subject.class.create_browser_stack_jobs(screenshots_job)
 
-      expect(screenshots_job.browser_stack_jobs.size).to eq(subject.class.url_paths.size)
+      expect(screenshots_job.browser_stack_jobs.size).to eq(screenshots_job.url_paths.size)
     end
   end
 
@@ -95,10 +95,4 @@ describe BrowserStackService do
   end
 
   describe '.generate_browsers_params'
-
-  describe '.url_paths' do
-    it 'contains an array of URL paths' do
-      expect(subject.class.url_paths).to be_an(Array)
-    end
-  end
 end

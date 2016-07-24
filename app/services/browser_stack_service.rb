@@ -35,11 +35,11 @@ class BrowserStackService
     )
   end
 
-  def self.create_browser_stack_jobs(screenshot_job)
-    url_paths.each do |path|
-      screenshot_job.browser_stack_jobs.create(
+  def self.create_browser_stack_jobs(screenshots_job)
+    screenshots_job.url_paths.each do |path|
+      screenshots_job.browser_stack_jobs.create(
         url_path: path,
-        job_params: generate_params(screenshot_job, path)
+        job_params: generate_params(screenshots_job, path)
       )
     end
   end
@@ -65,12 +65,5 @@ class BrowserStackService
         browser: browser.browser
       }
     end
-  end
-
-  def self.url_paths
-    [
-      '/',
-      '/categories/makeup'
-    ]
   end
 end

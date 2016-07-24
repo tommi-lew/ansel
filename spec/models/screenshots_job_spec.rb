@@ -9,10 +9,15 @@ describe ScreenshotsJob do
   it { is_expected.to validate_inclusion_of(:status).in_array(subject.class::STATUSES) }
 
   describe 'validations' do
-    describe 'browser_ids_cannot_be_empty' do
+    describe 'array_attributes_cannot_be_empty' do
       it 'does not allow browser_ids to be empty' do
         subject.browser_ids = []
         expect(subject).to have(1).error_on(:browser_ids)
+      end
+
+      it 'does not allow browser_ids to be empty' do
+        subject.url_paths = []
+        expect(subject).to have(1).error_on(:url_paths)
       end
     end
 
