@@ -1,0 +1,19 @@
+h1 Browsers
+
+table
+  thead
+    tr
+      th Browser
+      th Browser version
+      th Device
+      th OS
+      th OS version
+
+  tbody
+    - @browsers.each do |browser|
+      tr
+        td= browser.browser
+        td= browser.browser_version
+        td= browser.device
+        td= browser.os
+        td= browser.os_version
