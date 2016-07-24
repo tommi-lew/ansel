@@ -10,27 +10,6 @@ class BrowserStackService
     )
   end
 
-  def generate_screenshots_for_job(browser_stack_job)
-    bs_job = if browser_stack_job.is_a?(BrowserStackJob)
-               browser_stack_job
-             else
-               BrowserStackJob.find(browser_stack_job)
-             end
-
-    Rails.logger.info "Generating screenshots for Browser Stack Job ID: #{bs_job.id}"
-
-    request_id = generate_screenshots(bs_job.job_params)
-    request_state = screenshots_status(request_id)
-
-    puts "Request state for Browser Stack Job #{bs_job.id} is #{request_state}"
-
-    bs_job.update(request_id: request_id, status: 'queued_all')
-  end
-
-  def generate_screenshots(params)
-    @client.generate_screenshots(params)
-  end
-
   def screenshots_status(request_id)
     @client.screenshots_status(request_id)
   end

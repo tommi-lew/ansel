@@ -3,5 +3,6 @@ FactoryGirl.define do
     screenshots_job
     sequence(:url_path) { |n| "/path#{n}" }
     sequence(:request_id) { |n| "RequestId#{n}" }
+    status 'scheduled'
   end
 end

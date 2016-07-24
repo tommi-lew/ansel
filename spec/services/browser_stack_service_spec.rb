@@ -16,24 +16,6 @@ describe BrowserStackService do
     end
   end
 
-  describe '#generate_screenshots_for_job' do
-    it 'generates screenshots for a browser stack job' do
-      bs_job = create(:browser_stack_job, job_params: { 'fake_key' => 'fake_value' })
-
-      mock(subject).generate_screenshots(hash_including({ 'fake_key' => 'fake_value' }))
-      stub(client).screenshots_status()
-
-      subject.generate_screenshots_for_job(bs_job)
-    end
-  end
-
-  describe '#generate_screenshots' do
-    it 'hits api to generate screenshots' do
-      mock(client).generate_screenshots('params')
-      subject.generate_screenshots('params')
-    end
-  end
-
   describe '#screenshots_status' do
     it 'hits api to get screenshots status' do
       mock(client).screenshots_status('request_id') { 'queued_all' }

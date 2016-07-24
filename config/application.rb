@@ -25,5 +25,7 @@ module Ansel
 
     # Observers
     config.active_record.observers = :screenshots_job_observer
+
+    config.autoload_paths += %W(#{config.root}/lib)
   end
 end
