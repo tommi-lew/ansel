@@ -1,7 +1,7 @@
 class ScreenshotsJob < ActiveRecord::Base
   STATUSES = %w(scheduled done)
 
-  has_many :browser_stack_jobs
+  has_many :browser_stack_jobs, dependent: :destroy
 
   validates :url_base, :status, :requester, presence: true
   validates :status, inclusion: { in: STATUSES }
