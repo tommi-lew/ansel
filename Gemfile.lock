@@ -137,6 +137,8 @@ GEM
     redis (3.2.2)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
+    responders (2.3.0)
+      railties (>= 4.2.0, < 5.1)
     rollbar (2.8.3)
       multi_json
     rr (1.1.2)
@@ -176,6 +178,9 @@ GEM
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
       redis (~> 3.2, >= 3.2.1)
+    simple_form (3.3.1)
+      actionpack (> 4, < 5.1)
+      activemodel (> 4, < 5.1)
     sinatra (1.4.7)
       rack (~> 1.5)
       rack-protection (~> 1.4)
@@ -243,6 +248,7 @@ DEPENDENCIES
   rails-observers
   rails_12factor
   redis-namespace
+  responders
   rollbar (~> 2.8.3)
   rr
   rspec-activejob
@@ -251,6 +257,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   shoulda-matchers
   sidekiq
+  simple_form
   sinatra
   slim-rails
   spring

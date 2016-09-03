@@ -10,6 +10,8 @@ gem 'jquery-rails'
 gem 'slim-rails'
 gem 'squeel'
 gem 'browserstack-screenshot'
+gem 'simple_form'
+gem 'responders'
 
 # Application server
 gem 'passenger'
