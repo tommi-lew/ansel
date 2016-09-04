@@ -9,7 +9,7 @@ class BrowserStackJob < ActiveRecord::Base
 
   scope :scheduled, -> { where(status: 'scheduled') }
   scope :done, -> { where(status: 'done') }
-  scope :in_progress, -> { where{ status >> my{in_progress_states} } }
+  scope :in_progress, -> { where(status: in_progress_states) }
 
   def self.in_progress_states
     %w(queue queued_all)

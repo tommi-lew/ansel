@@ -9,7 +9,7 @@ class ScreenshotsJob < ActiveRecord::Base
   validates_with UrlValidator, fields: [:url_base]
 
   def completed?
-    self.browser_stack_jobs.where{ status >> BrowserStackJob.incomplete_states }.size == 0
+    self.browser_stack_jobs.where(status: BrowserStackJob.incomplete_states).size == 0
   end
 
   private
