@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160724141759) do
+ActiveRecord::Schema.define(version: 20160905013309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,12 +19,12 @@ ActiveRecord::Schema.define(version: 20160724141759) do
   create_table "browser_stack_jobs", force: :cascade do |t|
     t.json     "job_params",         default: {}
     t.string   "url_path"
-    t.string   "status",             default: "scheduled"
+    t.string   "status",             default: "created_locally"
     t.string   "request_id"
     t.json     "result"
     t.integer  "screenshots_job_id"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
   create_table "browsers", force: :cascade do |t|
